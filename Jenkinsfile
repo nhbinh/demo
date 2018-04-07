@@ -1,12 +1,28 @@
 node {
-   
+	def app
+	
    	stage 'Stage 1'
    		echo 'Hello there, shell scripts'
+		
    	stage 'Checkout'
-   		git url: 'https://github.com/TTFHW/jenkins_pipeline_shell_scripts.git'
-   	stage 'Build'
-   		sh './myBuild.sh'
-   	stage 'Deploy'
-   		sh './myDeployment.sh'
+   		git url: 'https://github.com/nhbinh/demo.git'
+		
+   	stage 'Build'{
+   		'javac HelloWorld.java'
+		app = docker.build("getintodevops/hellonode")
+	}
+	
+	stage('Test image') {
+        app.inside {
+            sh 'echo "Tests passed"'
+        }
+    }
+	
+	stage('Push image') {
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
+        }
+    }
   
 }
