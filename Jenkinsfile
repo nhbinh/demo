@@ -8,8 +8,7 @@ node {
    		git url: 'https://github.com/nhbinh/demo.git'
 		
    	stage 'Build'{
-   		'javac HelloWorld.java'
-		app = docker.build("getintodevops/hellonode")
+   		'javac HelloWorld.java'		
 	}
 	
 	stage('Test image') {
