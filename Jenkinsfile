@@ -7,7 +7,7 @@ node {
    	stage 'Checkout'
    		git url: 'https://github.com/nhbinh/demo.git'
 		
-   	stage 'Build'{
+   	stage 'build'{
    		'javac HelloWorld.java'		
 	}
 	
