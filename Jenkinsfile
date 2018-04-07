@@ -9,7 +9,7 @@ node {
 		
    	stage 'Build'
    		'javac HelloWorld.java'
-		app = docker.build("getintodevops/hellonode")
+		app = docker.build("java8-helloworld")
 	
 	stage('Test image') {
         app.inside {
