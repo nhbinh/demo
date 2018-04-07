@@ -18,7 +18,7 @@ node {
     }
 	
 	stage('Push image') {
-        docker.withRegistry('https://registry.hub.docker.com', 'nhbinh/java8-helloworld') {
+        docker.withRegistry('https://registry.hub.docker.com', 'bmhiaW5oOkNvbmFuQDAzMDg=') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
         }
