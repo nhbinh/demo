@@ -8,7 +8,7 @@ node {
    		git url: 'https://github.com/nhbinh/demo.git'
 		
    	stage 'Build'
-   		'javac HelloWorld.java'		
+   		sh 'javac HelloWorld.java'		
 		sh 'docker build -t java8-helloworld .'		
 		sh 'docker tag java8-helloworld nhbinh/java8-helloworld'
 	stage('Test image') {        
