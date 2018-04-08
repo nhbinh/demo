@@ -8,9 +8,9 @@ node {
    		git url: 'https://github.com/nhbinh/demo.git'
 		
    	stage 'Build'
-   		'javac HelloWorld.java'
-		app = docker.build("java8-helloworld")
-	
+   		'javac HelloWorld.java'		
+		sh 'docker build -t java8-helloworld .'		
+		sh 'docker tag java8-helloworld nhbinh/java8-helloworld'
 	stage('Test image') {
         app.inside {
             sh 'echo "Tests passed"'
@@ -18,10 +18,9 @@ node {
     }
 	
 	stage('Push image') {
-        docker.withRegistry('https://hub.docker.com/', 'demo_jenkins_cred_id') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-        }
-    }
-  
+		withCredentials([usernamePassword(credentialsId: 'demo_jenkins_cred_id', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+          	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+          	sh 'docker push nhbinh/java8-helloworld'
+        }l
+    }  
 }
