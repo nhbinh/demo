@@ -18,6 +18,6 @@ node {
 		withCredentials([usernamePassword(credentialsId: 'demo_jenkins_cred_id', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
           	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
           	sh 'docker push nhbinh/java8-helloworld'
-        }l
+        }
     }  
 }
