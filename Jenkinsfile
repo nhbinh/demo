@@ -10,14 +10,15 @@ node {
    	stage 'Build'
    		sh 'javac HelloWorld.java'	
 		sh 'docker build -t java8-helloworld .'		
-		sh 'docker tag java8-helloworld nhbinh/java8-helloworld'
+		
 	stage('Test image') {
-            sh 'docker run nhbinh/java8-helloworld'
+            sh 'docker run java8-helloworld'
     	}
 	
 	stage('Push image') {
 		withCredentials([usernamePassword(credentialsId: 'demo_jenkins_cred_id', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
           	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+		sh 'docker tag java8-helloworld nhbinh/java8-helloworld'
           	sh 'docker push nhbinh/java8-helloworld'
         }
     }  
