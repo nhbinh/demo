@@ -18,7 +18,7 @@ node {
     }
 	
 	stage('Push image') {
-        docker.withRegistry('nhbinh', 'demo_jenkins_cred_id') {
+        docker.withRegistry('https://registry.hub.docker.co', 'demo_jenkins_cred_id') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
         }
