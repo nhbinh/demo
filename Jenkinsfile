@@ -9,7 +9,7 @@ node {
 		
    	stage 'Build'
    		sh 'javac HelloWorld.java'
-		sh 'ls'
+		sh 'pwd'
 		sh 'docker build -t java8-helloworld .'		
 		sh 'docker tag java8-helloworld nhbinh/java8-helloworld:1'
 	stage('Test image') {
