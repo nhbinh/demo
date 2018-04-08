@@ -10,11 +10,9 @@ node {
    	stage 'Build'
    		'javac HelloWorld.java'		
 		sh 'docker build -t java8-helloworld .'		
-	stage('Test image') {
-        app.inside {
-            sh 'echo "Tests passed"'
-        }
-    }
+	stage('Test image') {        
+            sh 'echo "Tests passed"'        
+    	}
 	
 	stage('Push image') {
 		withCredentials([usernamePassword(credentialsId: 'demo_jenkins_cred_id', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
