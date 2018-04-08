@@ -1,4 +1,4 @@
 FROM java:8-jre
-COPY * /opt/app/
+COPY ./*.class /opt/app/
 WORKDIR /opt/app
 CMD ["java", "HelloWorld"]
